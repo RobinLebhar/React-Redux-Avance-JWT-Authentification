@@ -1,8 +1,4 @@
-# Starter React V16 + Redux
-
-+ Création du dossier server
-+ npm install -g nodemon
-+ npm install --save morgan body-parser mongoose express
-+ Ajout d'une commande de lancement du serveur dans package.json
-+ React-Redux-Avance-JWT-Authentification
-
+### Dans cette branche : ###
++ création d'un model mongoose pour un utilisateur
++ Inscription et connexion a mongo lab
++ Connexion a mongodb dans l'index

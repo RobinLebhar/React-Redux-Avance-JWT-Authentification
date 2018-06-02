@@ -4,6 +4,12 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const expressServer = express();
 const router = require("./route");
+const mongoose = require("mongoose")
+//DB setup
+mongoose.connect("mongodb://robinuser:robinuser@ds245347.mlab.com:45347/robin001")
+mongoose.connection
+    .once('open', () => console.log('Connecté à MongoLab'))
+    .on('error', error => console.log('Erreur de connexion à MongoLab:', error));
 
 // App Setup
 expressServer.use(morgan('combined'));
