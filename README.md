@@ -1,8 +1,8 @@
 ### Dans cette branche : ###
-+ CSS header
-+ Création d'un formulaire signup + ajout de sa route + ajout des validations de formulaire
-+ Création d'une action signup + appel de celle ci au submit
-+ Blocage du lien ressource si non connectés
-+ Utilisation de l'helper require-authentification pour bloquer ressources si non connecté
-+ Connexion automatique de l'utilisateur si le token est présent ( index.js )
-+ Ajout de css et champs titre dans login et signup
++ Renommage de la route specialRessource
++ Création d'une action vers specialRessource et action type
++ Appel de celle ci depuis ressources
++ Modification de Ressource pour appeler son action sécurisée
++ Mise a jour du hoc require-authentification pour empecher le render par défaut
++ Ajout d'un reducer pour les ressources + mise a jour du root reducer
++ Affichage des ressources du store dans le composant ressources

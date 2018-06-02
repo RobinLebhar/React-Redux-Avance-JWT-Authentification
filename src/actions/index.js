@@ -1,5 +1,5 @@
 import {
-    SET_AUTHENTIFICATION, INCREMENT_ACTIONS_COUNT, ADD_RESSOURCE
+    SET_AUTHENTIFICATION, INCREMENT_ACTIONS_COUNT, ADD_RESSOURCE, PARSE_MESSAGE
 } from './action-types';
 import axios from "axios"
 const BASE_URL = "http://localhost:3090";
@@ -53,6 +53,21 @@ export function signupUser({ email, password }, history) {
                 dispatch({ type: SET_AUTHENTIFICATION, payload: true })
                 localStorage.setItem("token", response.data.token)
                 history.push("/ressources");
+            })
+            .catch((err) => {
+                console.log("erreur", err)
+            })
+    }
+}
+
+export function getSpecialRessource() {
+    return function (dispatch) {
+        axios.get(`${BASE_URL}/specialRessource`, {
+            headers: { authorization: localStorage.getItem("token") }
+        })
+            .then((response) => {
+                console.log(response.data.result)
+                dispatch({ type: PARSE_MESSAGE, payload: response.data.result })
             })
             .catch((err) => {
                 console.log("erreur", err)

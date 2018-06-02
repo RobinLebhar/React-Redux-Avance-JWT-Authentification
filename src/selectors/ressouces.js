@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 import lodash from "lodash"
 
 export const getRessourceList = state => state.ressources.ressourceList
-
+export const getRessourceMessage = state => state.ressources.message
 export const getContainsOneRessourceList = state => {
     return state.ressources.ressourceList.filter(r => r.toString().indexOf('1') > -1)
 }

@@ -1,24 +1,33 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
+import React, {
+    Component
+} from 'react';
+import {
+    connect
+} from 'react-redux';
+
 
 export default function (Component) {
     class RequireAuthentication extends Component {
-
+        state = {
+            shouldComponentBeRender: true
+        }
         componentWillMount() {
             if (!this.props.isLoggedIn) {
-                this.props.history.push("/");
+                this.setState({
+                    shouldComponentBeRender: false
+                })
             }
         }
 
         componentWillUpdate(nextProps) {
+            // Si on est déja sur le lien et que l'utilisateur se déconnecte.
             if (!nextProps.isLoggedIn) {
                 this.props.history.push("/");
             }
         }
 
         render() {
-            return <Component {...this.props} />
+            return this.state.shouldComponentBeRender && <Component {...this.props} />
         }
     }
 
@@ -27,5 +36,5 @@ export default function (Component) {
     });
 
 
-    return withRouter(connect(mapStateToProps)(RequireAuthentication));
+    return connect(mapStateToProps)(RequireAuthentication);
 }
