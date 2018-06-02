@@ -43,3 +43,7 @@ exports.signup = function (req, res, next) {
 
     })
 }
+
+exports.signin = function (req, res, next) {
+    res.json({ token: getTokenForUser(req.user) });
+}
