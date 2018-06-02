@@ -45,3 +45,17 @@ export function signinOutUser() {
         localStorage.removeItem("token")
     }
 }
+
+export function signupUser({ email, password }, history) {
+    return function (dispatch) {
+        axios.post(`${BASE_URL}/signup/`, { email, password })
+            .then((response) => {
+                dispatch({ type: SET_AUTHENTIFICATION, payload: true })
+                localStorage.setItem("token", response.data.token)
+                history.push("/ressources");
+            })
+            .catch((err) => {
+                console.log("erreur", err)
+            })
+    }
+}
