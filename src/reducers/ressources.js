@@ -12,7 +12,6 @@ export default function RessourcesReducer(state = initialState, action) {
             return {
                 ressourceList: [...state.ressourceList, state.ressourceList[state.ressourceList.length - 1] + 1]
             }
-
+        default: return state;
     }
-    return state;
 }

@@ -1,21 +1,37 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom"
 import { connect } from "react-redux";
-import { setAuthentification } from "../actions/index";
-import { Link } from "react-router-dom";
+import * as actions from "../actions"
 
-export class Header extends Component {
-
-  setAuthentification = () => {
-    this.props.setAuthentification(!this.props.isLoggedIn);
+class Header extends Component {
+  signOut = () => {
+    this.props.signinOutUser();
   }
 
-  renderAuthentificationLabel = () => {
-    if (this.props.isLoggedIn) {
-      return "Deconnexion"
+  renderAuthentificationLink = () => {
+    if (this.props.isLoggedIn)
+      return (
+        <li className="nav-item">
+          <Link className="nav-link" to={"/signout"} >Déconnexion</Link>
+        </li>
+      );
+    else {
+      return (
+        [
+          <li key={1} className="nav-item">
+            <Link className="nav-link" to={"/signin"}>Connexion</Link>
+          </li>
+          ,
+          <li key={2} className="nav-item">
+            <Link className="nav-link" to={"/signup"}>Inscription</Link>
+          </li>
+
+        ]
+
+      );
     }
-    return "Connexion"
-  }
 
+  }
   render() {
     return (
       <ul className="nav nav-tabs bg-primary">
@@ -25,20 +41,14 @@ export class Header extends Component {
         <li className="nav-item">
           <Link className="nav-link" to={"/ressources"} >Ressources</Link>
         </li>
-        <li className="nav-item">
-          <a className="nav-link" onClick={this.setAuthentification} >{this.renderAuthentificationLabel()}</a>
-        </li>
+        {this.renderAuthentificationLink()}
       </ul>
+
     );
   }
 }
-
 const mapStateToProps = state => ({
   isLoggedIn: state.authentification.isLoggedIn
 });
 
-const mapDispatchToProps = {
-  setAuthentification
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, actions)(Header);
