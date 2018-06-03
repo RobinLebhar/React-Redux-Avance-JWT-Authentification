@@ -9,6 +9,7 @@ import requireAuth from '../helpers/require-authentification';
 import Home from "./home";
 import Header from '../containers/header';
 import Signup from "./signup"
+import Errors from "./errors"
 require("../style.css");
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
     <div >
       <Header />
       <div className="container body_content">
+        <Errors />
         <Switch >
           <Route exact path="/" component={Home} />
           <Route path="/ressources" component={requireAuth(Ressources)} />

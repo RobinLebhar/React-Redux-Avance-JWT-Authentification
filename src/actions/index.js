@@ -1,5 +1,5 @@
 import {
-    SET_AUTHENTIFICATION, INCREMENT_ACTIONS_COUNT, ADD_RESSOURCE, PARSE_MESSAGE
+    SET_AUTHENTIFICATION, INCREMENT_ACTIONS_COUNT, ADD_RESSOURCE, PARSE_MESSAGE, PARSE_ERROR, RESET_ERROR
 } from './action-types';
 import axios from "axios"
 const BASE_URL = "http://localhost:3090";
@@ -34,7 +34,7 @@ export function signinUser({ email, password }, history) {
                 history.push("/ressources");
             })
             .catch((err) => {
-                console.log("erreur", err)
+                dispatch(parseError("Identifiants invalides"))
             })
     }
 }
@@ -54,9 +54,6 @@ export function signupUser({ email, password }, history) {
                 localStorage.setItem("token", response.data.token)
                 history.push("/ressources");
             })
-            .catch((err) => {
-                console.log("erreur", err)
-            })
     }
 }
 
@@ -66,11 +63,14 @@ export function getSpecialRessource() {
             headers: { authorization: localStorage.getItem("token") }
         })
             .then((response) => {
-                console.log(response.data.result)
                 dispatch({ type: PARSE_MESSAGE, payload: response.data.result })
             })
-            .catch((err) => {
-                console.log("erreur", err)
-            })
     }
+}
+
+export function resetError() {
+    return { type: RESET_ERROR }
+}
+export function parseError(errorMessage) {
+    return { type: PARSE_ERROR, payload: errorMessage }
 }

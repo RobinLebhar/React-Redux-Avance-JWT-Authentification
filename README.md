@@ -1,8 +1,7 @@
 ### Dans cette branche : ###
-+ Renommage de la route specialRessource
-+ Création d'une action vers specialRessource et action type
-+ Appel de celle ci depuis ressources
-+ Modification de Ressource pour appeler son action sécurisée
-+ Mise a jour du hoc require-authentification pour empecher le render par défaut
-+ Ajout d'un reducer pour les ressources + mise a jour du root reducer
-+ Affichage des ressources du store dans le composant ressources
+
++ Création du composant error
++ ajout d'action et action type pour ajouter et supprimer les erreur
++ Modification du helper pour ne pas rediriger tout le temps si l'utlisateur est déconnecté
++ Ajout d'un reducer pour gérer les erreur et root reducer
++ Ajout de Errors dans App
