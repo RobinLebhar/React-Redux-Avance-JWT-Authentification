@@ -12,7 +12,7 @@ exports.signup = function (req, res, next) {
         if (existingUser) {
             return res.status(422).send({ error: "Email utilisé" })
         }
-        if (!lodash.isEmpty(lodash) && !lodash.isEmpty(password)) {
+        if (!lodash.isEmpty(email) && !lodash.isEmpty(password)) {
             const user = new User({
                 email: email,
                 password: password
