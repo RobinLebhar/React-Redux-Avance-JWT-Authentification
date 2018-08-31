@@ -1,8 +1,5 @@
-# Starter React V16 + Redux
+# Ce qui à été fait dans cette branche :
 
-+ Création du dossier server
-+ npm install -g nodemon
-+ npm install --save morgan body-parser mongoose express
-+ Ajout d'une commande de lancement du serveur dans package.json
-+ React-Redux-Avance-JWT-Authentification
-
++ Mise en place des routes dans app et index.js
++ création de Home
++ Mise en place des routes dans le Header
