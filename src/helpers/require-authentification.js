@@ -1,40 +1,26 @@
-import React, {
-    Component
-} from 'react';
-import {
-    connect
-} from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-
-export default function (Component) {
-    class RequireAuthentication extends Component {
-        state = {
-            shouldComponentBeRender: true
-        }
-        componentWillMount() {
-            if (!this.props.isLoggedIn) {
-                this.setState({
-                    shouldComponentBeRender: false
-                })
-            }
-        }
-
-        componentWillUpdate(nextProps) {
-            // Si on est déja sur le lien et que l'utilisateur se déconnecte.
-            if (!nextProps.isLoggedIn) {
-                this.props.history.push("/");
-            }
-        }
-
-        render() {
-            return this.state.shouldComponentBeRender && <Component {...this.props} />
-        }
+export default function(ChildComponent) {
+  class RequireAuthentification extends Component {
+    componentWillMount() {
+      if (!this.props.isLoggedIn) {
+        this.props.history.push("/");
+      }
     }
+    componentWillUpdate(nextProps) {
+      if (!nextProps.isLoggedIn) {
+        this.props.history.push("/");
+      }
+    }
+    render() {
+      return this.props.isLoggedIn && <ChildComponent />;
+    }
+  }
 
-    const mapStateToProps = state => ({
-        isLoggedIn: state.authentification.isLoggedIn
-    });
+  const mapStateToProps = state => ({
+    isLoggedIn: state.authentification.isLoggedIn
+  });
 
-
-    return connect(mapStateToProps)(RequireAuthentication);
+  return connect(mapStateToProps)(RequireAuthentification);
 }
